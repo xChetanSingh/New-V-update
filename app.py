@@ -1,6 +1,5 @@
 import logging
 import pyrogram
-import requests
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import time
 
