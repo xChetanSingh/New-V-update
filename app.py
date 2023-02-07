@@ -7,33 +7,23 @@ import time
 
 #Configssss -- Edit Alll
 API_ID = 0000
-API_HASH = ''
-BOT_TOKEN = ''
+API_HASH = 'd7877fa235f24635921e287aaa800507'
+BOT_TOKEN = 'd7877fa235f24635921e287aaa800507'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
-web_domain = ""
-howtodownload = ""
-channelurl = ""
+web_domain = "https://www.xdubteam.in/"
+howtodownload = "https://www.xdubteam.in/how-to-use/"
+channelurl = "https://t.me/official_toonmixindia"
 
 
 # Random Texts :
 
-rulesss = '''⁣<b>Group rules</b> 
+rulesss = '''⁣<b>How To Use Me 📣</b> 
 
-#Rule1 - Be Kind, Don't offend anyone.
-#Rule2 - No Promotion.
-#Rule3 - Insulting is not tolerated.
-#Rule4 - Don't Spam, Flood and Ping Repeatedly.
-#Rule5 - NSFW not allowed.
-#Rule6 - No ETA for any release.
-#Rule7 - No Course for "How to Download from OTT Services" and "How to convert/encode".
-#Rule8 - Do not ask for RAWs or Watermarkless Encodes.
-#Rule9 - Don't PM anyone without there permission.
-#Rule10 - Multi Audio Releases only for OTT services.
-#Rule11 - Chat in Hindi and English only.
-#Rule12 - Request through #request.
-#Rule13 - Report Dead Links through #report.
-#Rule14 - Don't ask stupid questions, and instead use giybf.com and some common sense.
-#Rule15 - Do not discuss or fight about kangers.'''
+Jab bhi aap bot se search 🔎 karwaaye toh first of all aapko yaad rakhna hai "series name" + Season + (number) agar koi movie hai toh movie name only 
+
+Example: Dr. stone Season 3
+
+Movie name example: Doraemon Stand By Me 2'''
 # Enable logging
 logging.basicConfig(level=logging.INFO)
 
@@ -45,7 +35,7 @@ app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT
 def handle_new_message(client , message):
     # Get the search query from the message text
     search_query = message.text
-    if "/rules" in search_query :
+    if "/start" in search_query :
         message.reply(rulesss)
         
     if len(search_query) < 20 :
@@ -104,7 +94,7 @@ def show_results(posts, start, end , sss):
         return 0 , 0
     else :
         reply = sss
-        buttons = [[InlineKeyboardButton("⚡How To Download⚡",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("Visit TMI",url=web_domain)]]
+        buttons = [[InlineKeyboardButton("⬇ How To Download",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("Visit Web",url=web_domain)]]
         # print(posts)
         for result in results:
             x = [InlineKeyboardButton(result['title'],url=result['url'])]
