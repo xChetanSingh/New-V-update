@@ -24,6 +24,9 @@ Example: Dr. stone Season 3
 
 Movie name example: Doraemon Stand By Me 2'''
 
+# Enable logging
+logging.basicConfig(level=logging.INFO)
+
 # Initialize the client
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
@@ -32,7 +35,7 @@ app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT
 def handle_new_message(client , message):
     # Get the search query from the message text
     search_query = message.text
-    if "/start" in search_query :
+    if "/rules" in search_query :
         message.reply(rulesss)
         
     if len(search_query) < 20 :
@@ -91,7 +94,7 @@ def show_results(posts, start, end , sss):
         return 0 , 0
     else :
         reply = sss
-        buttons = [[InlineKeyboardButton("⬇ How To Download",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("Visit Web",url=web_domain)]]
+        buttons = [[InlineKeyboardButton("⚡How To Download⚡",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("Visit TMI",url=web_domain)]]
         # print(posts)
         for result in results:
             x = [InlineKeyboardButton(result['title'],url=result['url'])]
@@ -135,6 +138,5 @@ def tmdbinfo(q):
     except :
         return "https://i.ibb.co/rsmv4n1/photo-2022-02-18-16-38-12-2.jpg"
 app.run()
-
 
 
