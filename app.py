@@ -1,4 +1,3 @@
-import logging
 import pyrogram
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import time
@@ -24,8 +23,7 @@ Example: Dr. stone Season 3
 
 Movie name example: Doraemon Stand By Me 2'''
 
-# Enable logging
-logging.basicConfig(level=logging.INFO)
+
 
 # Initialize the client
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
