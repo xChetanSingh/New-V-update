@@ -125,7 +125,7 @@ def tmdbinfo(q):
     try :
         response = requests.get(f"https://api.themoviedb.org/3/search/multi?api_key={TDMB_API}&query={q}")
         data = response.json()
-        result = data["results"][0]
+        result = data["results"][1]
         poster_path = result["poster_path"]
 
         if poster_path :
