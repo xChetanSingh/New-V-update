@@ -7,7 +7,7 @@ import requests
 #Configssss -- Edit Alll
 API_ID = 6459362
 API_HASH = 'd7877fa235f24635921e287aaa800507'
-BOT_TOKEN = '5548956817:AAGVap6bRbSNuMN86ybRSlf6tWDFc4ucUaA'
+BOT_TOKEN = '5618692983:AAEqS0SKUKgSkp6dpaZ24KSbwsdj60xEov8'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
 web_domain = "https://www.xdubteam.in/"
 howtodownload = "https://vimeo.com/794611499"
