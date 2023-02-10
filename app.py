@@ -42,7 +42,7 @@ def handle_new_message(client , message):
     if "/rules" in search_query :
         message.reply(rulesss)
         
-    if len(search_query) < 20 :
+    if len(search_query) < 150 :
         # print(message)
         # Fetch the WordPress posts for the given search query
         # This is just an example and you need to replace it with your own implementation
