@@ -38,7 +38,7 @@ def handle_new_message(client , message):
         message.reply(rulesss)
         
     if len(search_query) < 20 :
-        print(message)
+        # print(message)
         # Fetch the WordPress posts for the given search query
         # This is just an example and you need to replace it with your own implementation
         # to fetch the WordPress posts based on the search query
@@ -58,10 +58,8 @@ def handle_new_message(client , message):
             mak = InlineKeyboardMarkup(m+m2)
             # Send the results to the group
             # x = message.reply(reply,reply_markup=mak)
-            image_url = tmdbinfo(search_query)
-            print(image_url)
-            message.reply_photo(photo=image_url, caption=reply, reply_markup=mak)
-                # message.reply(reply, reply_markup=get_keyboard(posts, start, end))
+            # message.reply_photo(photo=image_url, caption=reply, reply_markup=mak)
+            message.reply(reply, reply_markup=mak)
 
 
 # Define a handler for callback queries
@@ -121,21 +119,19 @@ def delete_message_after_timeout(message, timeout):
     time.sleep(timeout)
     message.delete()
 
-def tmdbinfo(q):
-    try :
-        response = requests.get(f"https://api.themoviedb.org/3/search/multi?api_key={TDMB_API}&query={q}")
-        data = response.json()
-        result = data["results"][1]
-        poster_path = result["poster_path"]
+# def tmdbinfo(q):
+#     try :
+#         response = requests.get(f"https://api.themoviedb.org/3/search/multi?api_key={TDMB_API}&query={q}")
+#         data = response.json()
+#         result = data["results"][1]
+#         poster_path = result["poster_path"]
 
-        if poster_path :
-            poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}"
-            return poster_url
-        else :
-            poster_url = "https://i.ibb.co/rsmv4n1/photo-2022-02-18-16-38-12-2.jpg"
-            return poster_url
-    except :
-        return "https://i.ibb.co/rsmv4n1/photo-2022-02-18-16-38-12-2.jpg"
+#         if poster_path :
+#             poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}"
+#             return poster_url
+#         else :
+#             poster_url = "https://i.ibb.co/rsmv4n1/photo-2022-02-18-16-38-12-2.jpg"
+#             return poster_url
+#     except :
+#         return "https://i.ibb.co/rsmv4n1/photo-2022-02-18-16-38-12-2.jpg"
 app.run()
-
-
