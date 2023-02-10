@@ -18,11 +18,17 @@ channelurl = "https://t.me/official_toonmixindia"
 
 rulesss = '''⁣<b>How To Use Me 📣</b> 
 
-Jab bhi aap bot se search 🔎 karwaaye toh first of all aapko yaad rakhna hai "series name" + Season + (number) agar koi movie hai toh movie name only 
+Jab bhi aap bot se search 🔎 karwaaye toh first of all aapko yaad rakhna hai "Series name" + Season + (Number) agar koi movie hai toh movie name only 
 
 Example: Dr. stone Season 3
 
-Movie name example: Doraemon Stand By Me 2'''
+Movie name example: Doraemon Stand By Me 2
+
+⁣<b>English</b> Whenever U want to Search With Text Here. So You Need To Know First OF All "Series name" + Season + (Number) If U Want To Seach a Movie Then There Will be Need Just a Movie Name
+Example: Dr. stone Season 3
+
+Movie name example: Doraemon Stand By Me 2
+'''
 
 
 
