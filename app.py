@@ -79,7 +79,7 @@ def handle_callback_query(client ,callback_query):
         # print(callback_query)
         # Show the results based on the action
         xx = callback_query.message.reply_to_message.text
-        xx2 = callback_query.message.caption
+        xx2 = callback_query.message.text
         posts = fetch_wordpress_posts(xx)
         reply,m = show_results(posts, start, end ,xx2)
         
