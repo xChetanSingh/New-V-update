@@ -120,9 +120,7 @@ def fetch_wordpress_posts(search_query):
     else:
         return []
 
-def delete_message_after_timeout(message, timeout):
-    time.sleep(timeout)
-    message.delete()
+
 
 # def tmdbinfo(q):
 #     try :
