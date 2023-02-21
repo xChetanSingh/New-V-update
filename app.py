@@ -107,7 +107,7 @@ def get_keyboard(posts, start, end):
     keyboard = []
     keyboard.append([InlineKeyboardButton(
             "⏮️ Previous", callback_data=f"{start-5},{end-5}"),InlineKeyboardButton(
-            
+            " ❌ ", callback_data=f"del"
         ),InlineKeyboardButton(
             "Next ⏭️", callback_data=f"{start+5},{end+5}"
         )] )
