@@ -107,7 +107,7 @@ def get_keyboard(posts, start, end):
     keyboard = []
     keyboard.append([InlineKeyboardButton(
             "⏮️ Previous", callback_data=f"{start-5},{end-5}"),InlineKeyboardButton(
-            " ❌ ", callback_data=f"del"
+            " ❌ ", callback_data=""
         ),InlineKeyboardButton(
             "Next ⏭️", callback_data=f"{start+5},{end+5}"
         )] )
@@ -120,7 +120,9 @@ def fetch_wordpress_posts(search_query):
     else:
         return []
 
-
+def delete_message_after_timeout(message, timeout):
+    time.sleep(timeout)
+    message.delete()
 
 # def tmdbinfo(q):
 #     try :
