@@ -52,7 +52,7 @@ def handle_new_message(client , message):
         # Show the first 5 results along with the buttons
         start = 0
         end = 5
-        data = f'''<b>Search for: {message.text} </b> \nRequested By: <a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> 
+        data = f'''<b>Search for: {message.text} </b> \nRequested By: <a href="tg://user?id={message.from_user.id}">“{message.from_user.first_name}”</a> 
         \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads'''
         reply,m = show_results(posts, start, end ,data)
         if reply == 0 :
@@ -97,7 +97,7 @@ def show_results(posts, start, end , sss):
         return 0 , 0
     else :
         reply = sss
-        buttons = [[InlineKeyboardButton("HOW TO WATCH/DOWNLOAD❔",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("🖥Visit Web",url=web_domain)]]
+        buttons = [[InlineKeyboardButton("HOW TO WATCH/DOWNLOAD❔",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("🖥 Visit Web",url=web_domain)]]
         # print(posts)
         for result in results:
             x = [InlineKeyboardButton(result['title'],url=result['url'])]
