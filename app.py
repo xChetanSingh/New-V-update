@@ -41,6 +41,9 @@ def handle_new_message(client , message):
     search_query = message.text
     if "/rules" in search_query :
         message.reply(rulesss)
+if "/start" in search_query :
+        message.reply(rulesss)
+
         
     if len(search_query) < 150 :
         # print(message)
@@ -52,7 +55,7 @@ def handle_new_message(client , message):
         # Show the first 5 results along with the buttons
         start = 0
         end = 5
-        data = f'''<b>Results for : {message.text} </b> \nRequested By : <a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>'''
+        data = f'''<b>Results for: {message.text} </b> \nRequested By: <a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>'''
         reply,m = show_results(posts, start, end ,data)
         if reply == 0 :
             pass
@@ -96,7 +99,7 @@ def show_results(posts, start, end , sss):
         return 0 , 0
     else :
         reply = sss
-        buttons = [[InlineKeyboardButton("⚡How To Watch/Download⚡",url=howtodownload)],[InlineKeyboardButton("Join Channel",url=channelurl),InlineKeyboardButton("Visit Web",url=web_domain)]]
+        buttons = [[InlineKeyboardButton("HOW TO WATCH/DOWNLOAD❓",url=howtodownload)],[InlineKeyboardButton("📢 JOIN CHANNEL",url=channelurl),InlineKeyboardButton("📺 VISIT WEB",url=web_domain)]]
         # print(posts)
         for result in results:
             x = [InlineKeyboardButton(result['title'],url=result['url'])]
@@ -106,10 +109,10 @@ def show_results(posts, start, end , sss):
 def get_keyboard(posts, start, end):
     keyboard = []
     keyboard.append([InlineKeyboardButton(
-            "⏮️ Previous", callback_data=f"{start-5},{end-5}"),InlineKeyboardButton(
+            "⏮️ PREV.", callback_data=f"{start-5},{end-5}"),InlineKeyboardButton(
             " ❌ ", callback_data=f"del"
         ),InlineKeyboardButton(
-            "Next ⏭️", callback_data=f"{start+5},{end+5}"
+            "NEXT ⏭️", callback_data=f"{start+5},{end+5}"
         )] )
     return keyboard
 
