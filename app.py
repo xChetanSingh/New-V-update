@@ -35,6 +35,14 @@ Movie name example: Doraemon Stand By Me 2'''
 # Initialize the client
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
+   # Define a handler for the messages in the group
+@app.on_message(pyrogram.filters.text)
+def handle_new_message(client , message):
+    # Get the search query from the message text
+    search_query = message.text
+    if "/start" in search_query :
+        message.reply(rulesss)
+
 # Define a handler for the messages in the group
 @app.on_message(pyrogram.filters.text)
 def handle_new_message(client , message):
@@ -54,7 +62,7 @@ def handle_new_message(client , message):
         start = 0
         end = 5
         data = f'''<b>Results for: {message.text} </b> \nRequested By: “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>”
-        \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads'''
+        \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
         reply,m = show_results(posts, start, end ,data)
         if reply == 0 :
             pass
@@ -98,7 +106,7 @@ def show_results(posts, start, end , sss):
         return 0 , 0
     else :
         reply = sss
-        buttons = [[InlineKeyboardButton("HOW TO WATCH/DOWNLOAD❓",url=howtodownload)],[InlineKeyboardButton("📲 JOIN CHANNEL",url=channelurl),InlineKeyboardButton("🌐 VISIT WEB",url=web_domain)]]
+        buttons = [[InlineKeyboardButton("HOW TO WATCH/DOWNLOAD❓",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)]]
         # print(posts)
         for result in results:
             x = [InlineKeyboardButton(result['title'],url=result['url'])]
@@ -125,21 +133,7 @@ def fetch_wordpress_posts(search_query):
 def delete_message_after_timeout(message, timeout):
     time.sleep(timeout)
     message.delete()
-    
-    # Define a handler for the messages in the group
-@app.on_message(pyrogram.filters.text)
-def handle_new_message(client , message):
-    # Get the search query from the message text
-    search_query = message.text
-    if "/start" in search_query :
-        message.reply(rulesss)
-        
-    if len(search_query) < 150 :
-        # print(message)
-        # Fetch the WordPress posts for the given search query
-        # This is just an example and you need to replace it with your own implementation
-        # to fetch the WordPress posts based on the search query
-        posts = fetch_wordpress_posts(search_query)
+     
 
 # def tmdbinfo(q):
 #     try :
