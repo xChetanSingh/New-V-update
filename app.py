@@ -25,6 +25,7 @@ Example: Dr. stone Season 3
 Movie name example: Doraemon Stand By Me 2
 
 ⁣<b>English</b>: Whenever U want to Search With Text Here. So You Need To Know First OF All "Series name" + Season + (Number) If U Want To Seach a Movie Then There Will be Need Just a Movie Name
+
 Example: Dr. stone Season 3
 
 Movie name example: Doraemon Stand By Me 2'''
@@ -39,7 +40,7 @@ app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT
 def handle_new_message(client , message):
     # Get the search query from the message text
     search_query = message.text
-    if "/rules" in search_query :
+    if "/rules , /start" in search_query :
         message.reply(rulesss)
         
     if len(search_query) < 150 :
