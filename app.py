@@ -41,8 +41,6 @@ def handle_new_message(client , message):
     search_query = message.text
     if "/rules" in search_query :
         message.reply(rulesss)
- if "/start" in search_query :
-        message.reply(rulesss)
         
     if len(search_query) < 150 :
         # print(message)
