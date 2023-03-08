@@ -100,7 +100,7 @@ def show_results(posts, start, end , sss):
         return 0 , 0
     else :
         reply = sss
-        buttons = [[InlineKeyboardButton("👉 HOW TO WATCH/DOWNLOAD❓👈",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)]]
+        buttons = [[InlineKeyboardButton("👉 <b>HOW TO WATCH/DOWNLOAD</b>❓👈",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)]]
         # print(posts)
         for result in results:
             x = [InlineKeyboardButton(result['title'],url=result['url'])]
