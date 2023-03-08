@@ -51,20 +51,6 @@ def handle_new_message(client , message):
         # to fetch the WordPress posts based on the search query
         posts = fetch_wordpress_posts(search_query)
 
-# Define a handler for the messages in the group
-@app.on_message(pyrogram.filters.text)
-def handle_new_message(client , message):
-    # Get the search query from the message text
-    search_query = message.text
-    if "/rules" in search_query :
-        message.reply(rulesss)
-        
-    if len(search_query) < 150 :
-        # print(message)
-        # Fetch the WordPress posts for the given search query
-        # This is just an example and you need to replace it with your own implementation
-        # to fetch the WordPress posts based on the search query
-        posts = fetch_wordpress_posts(search_query)
         
         # Show the first 5 results along with the buttons
         start = 0
