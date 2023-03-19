@@ -11,7 +11,7 @@ BOT_TOKEN = '5618692983:AAFi_Mfg1Xv4_0Gp0HaJlNLtKbz1U0g8uO8'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
 web_domain = "https://www.xdubteam.in/"
 howtodownload = "https://youtu.be/VidTDOP63bs"
-channelurl = "https://t.me/official_toonmixindia"
+channelurl = "https://t.me/toonmix_india"
 
 
 # Random Texts :
