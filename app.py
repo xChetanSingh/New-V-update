@@ -10,7 +10,7 @@ API_HASH = 'd7877fa235f24635921e287aaa800507'
 BOT_TOKEN = '5618692983:AAFi_Mfg1Xv4_0Gp0HaJlNLtKbz1U0g8uO8'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
 web_domain = "https://www.xdubteam.in/"
-howtodownload = "https://youtu.be/jmRfdHcoSJY"
+howtodownload = "https://youtu.be/-_WfkuVyJL4"
 channelurl = "https://t.me/toonmix_india"
 
 
