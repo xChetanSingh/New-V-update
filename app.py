@@ -65,6 +65,7 @@ def handle_callback_query(client ,callback_query):
     else :
         start, end = map(int, data.split(','))
         xx2 = callback_query.message.text
+        xx = callback_query.message.reply_to_message.text
         posts = fetch_wordpress_posts(xx)
         reply,m = show_results(posts, start, end ,xx2)
         m2 = get_keyboard(posts, start, end, _[1])
