@@ -41,7 +41,7 @@ def handle_new_message(client , message):
         user = message.from_user.id
         posts = fetch_wordpress_posts(search_query)
         start = 0
-        end = 5
+        end = 10
         data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>”
         \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
         reply,m = show_results(posts, start, end ,data)
