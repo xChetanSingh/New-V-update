@@ -1,12 +1,13 @@
 import pyrogram
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import time
 import requests
 
 
 #Configssss -- Edit Alll
 API_ID = 6459362
 API_HASH = 'd7877fa235f24635921e287aaa800507'
-BOT_TOKEN = '5618692983:AAFi_Mfg1Xv4_0Gp0HaJlNLtKbz1U0g8uO8'
+BOT_TOKEN = '6187306733:AAED4NTBSiAhMhrxO6biqKo2vEQe-WDDutM'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
 web_domain = "https://www.xdubteam.in/"
 howtodownload = "https://youtu.be/-_WfkuVyJL4"
@@ -29,8 +30,6 @@ Example: Dr. stone Season 3
 
 Movie name example: Doraemon Stand By Me 2'''
 
-
-
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 @app.on_message(pyrogram.filters.text)
@@ -41,7 +40,8 @@ def handle_new_message(client , message):
     if len(search_query) < 150 :
         user = message.from_user.id
         posts = fetch_wordpress_posts(search_query)
-        start , end = 0 ,5
+        start = 0
+        end = 5
         data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>”
         \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
         reply,m = show_results(posts, start, end ,data)
@@ -58,19 +58,24 @@ def handle_callback_query(client ,callback_query):
     _ = callback_query.data.split("||")
     data = _[0]
     if _[1] != str(callback_query.from_user.id):
-        callback_query.answer("You are not allowed to perform this action.",show_alert=True)
+        callback_query.answer(
+            "You are not allowed to perform this action.",
+            show_alert=True
+        )
         return
     if data == "del" :
         callback_query.message.delete()
     else :
         start, end = map(int, data.split(','))
+        xx = callback_query.message.reply_to_message.text
         xx2 = callback_query.message.text
         posts = fetch_wordpress_posts(xx)
         reply,m = show_results(posts, start, end ,xx2)
         m2 = get_keyboard(posts, start, end, _[1])
-        mak = InlineKeyboardMarkup(m+m2)
+        mak = InlineKeyboardMarkup(m+m2 )
         callback_query.message.edit(reply, reply_markup=mak)
-        
+
+
 def show_results(posts, start, end , sss):
     results = posts[start:end]
     if results == []:
@@ -86,7 +91,11 @@ def show_results(posts, start, end , sss):
 def get_keyboard(posts, start, end , user):
     keyboard = []
     keyboard.append([InlineKeyboardButton(
-            "⏮️ PREV.", callback_data=f"{start-5},{end-5}||{user}"),InlineKeyboardButton(" ❌ ", callback_data=f"del||{user}"),InlineKeyboardButton("NEXT ⏭️", callback_data=f"{start+5},{end+5}||{user}")] )
+            "⏮️ PREV.", callback_data=f"{start-5},{end-5}||{user}"),InlineKeyboardButton(
+            " ❌ ", callback_data=f"del||{user}"
+        ),InlineKeyboardButton(
+            "NEXT ⏭️", callback_data=f"{start+5},{end+5}||{user}"
+        )] )
     return keyboard
 
 def fetch_wordpress_posts(search_query):
@@ -95,5 +104,9 @@ def fetch_wordpress_posts(search_query):
         return response.json()
     else:
         return []
+
+def delete_message_after_timeout(message, timeout):
+    time.sleep(timeout)
+    message.delete()
 
 app.run()
