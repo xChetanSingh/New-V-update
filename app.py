@@ -92,10 +92,10 @@ def show_results(posts, start, end , sss):
 def get_keyboard(posts, start, end , user):
     keyboard = []
     keyboard.append([InlineKeyboardButton(
-            "⏮️ PREV.", callback_data=f"{start-5},{end-5}||{user}"),InlineKeyboardButton(
+            "⏮️ PREV.", callback_data=f"{start-10},{end-10}||{user}"),InlineKeyboardButton(
             " ❌ ", callback_data=f"del||{user}"
         ),InlineKeyboardButton(
-            "NEXT ⏭️", callback_data=f"{start+5},{end+5}||{user}"
+            "NEXT ⏭️", callback_data=f"{start+10},{end+10}||{user}"
         )] )
     return keyboard
 
