@@ -59,7 +59,8 @@ def handle_callback_query(client ,callback_query):
     data = _[0]
     if _[1] != str(callback_query.from_user.id):
         callback_query.answer(
-            "You are not allowed to perform this action.",
+            "😁 User Beta Masti Nhi...
+            Please Create Your Own Requests",
             show_alert=True
         )
         return
