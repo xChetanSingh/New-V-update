@@ -2,3 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/toonfyrq/repositories/toonmix/
+ - /bin/cp index.html $DEPLOYPATH
