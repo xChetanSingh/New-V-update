@@ -7,7 +7,7 @@ import requests
 #Configssss -- Edit Alll
 API_ID = 6459362
 API_HASH = 'd7877fa235f24635921e287aaa800507'
-BOT_TOKEN = '5618692983:AAHR2eVn35QrYtLh4LExuhu-QguDPyNE7cA'
+BOT_TOKEN = '5618692983:AAEj7wECP6r1Gm3HRSXbt3irhN2SMbAppf4'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
 web_domain = "https://www.toonmixindia.in/"
 howtodownload = "https://www.toonmixindia.in/how-to-use-me/"
