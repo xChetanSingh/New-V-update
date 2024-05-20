@@ -99,7 +99,7 @@ def get_keyboard(posts, start, end , user):
     return keyboard
 
 def fetch_wordpress_posts(search_query):
-    response = requests.get(f"{web_domain}/wp-json/wp/v2/search?search={search_query}&per_page=100")
+    response = requests.get(f"{web_domain}/apix5/findseries.php?api_key=HackerKi_Ma_ki_chut_bytmi&search={search_query}&per_page=100")
     if response.status_code == 200:
         return response.json()
     else:
