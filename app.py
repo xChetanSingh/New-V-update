@@ -2,111 +2,110 @@ import pyrogram
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import time
 import requests
-
-
-#Configssss -- Edit Alll
-API_ID = 6459362
-API_HASH = 'd7877fa235f24635921e287aaa800507'
-BOT_TOKEN = '5618692983:AAEj7wECP6r1Gm3HRSXbt3irhN2SMbAppf4'
-TDMB_API = "b93049a713559ad90b95537da68308fe"
-web_domain = "https://www.toonmixindia.in/"
-howtodownload = "https://www.toonmixindia.in/how-to-use-me/"
-channelurl = "https://t.me/toonmix_india"
-
-
-# Random Texts :
-
-rulesss = ''' ⁣<b>How To Use Me 📣</b> 
-
-Jab bhi aap bot se search 🔎 karwaaye toh first of all aapko yaad rakhna hai "Series name" + Season + (Number) agar koi movie hai toh movie name only 
-
-Example: Dr. stone Season 3
-
-Movie name example: Doraemon Stand By Me 2
-
-⁣<b>English</b>: Whenever U want to Search With Text Here. So You Need To Know First OF All "Series name" + Season + (Number) If U Want To Seach a Movie Then There Will be Need Just a Movie Name
-
-Example: Dr. stone Season 3
-
-Movie name example: Doraemon Stand By Me 2'''
+import random
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+from config import *
 
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
+
+
+def check_hentai(text,threshold=50):
+    matches = process.extract(text, trigger, scorer=fuzz.ratio)
+    filtered_matches = [match for match in matches if match[1] >= threshold]
+    if filtered_matches:
+        print(filtered_matches)
+        return True
+    else:
+        return False
+    
+def rand_emoji():
+    reactions = [ "👍", "👎", "😂", "😍", "😢", "😮", "😡", "😆", "🎉", "❤️", "😜", "🤔", "👏", "💯", "🔥", "🙌", "😎", "🥳", "🤯", "🙈", "💔", "🤗", "🤩", "😷", "😴", "😋", "😒", "😏", "🙄", "😓", "😱", "😰", "😳", "😵", "🤤", "😈", "👻", "🤪", "🤨", "🤮", "😇", "🤬", "🥺", "🥵", "🥶", "😠", "💩", "👀", "🙏", "💪", "✨", "🎶", "🌟", "👋", "😝", "🤝", "✌️", "🤞", "👌" ]
+    reaction = random.choice(reactions)
+    return reaction
+
+@app.on_message(pyrogram.filters.command("start"))
+async def start_command(client, message):
+    buttons = [
+        [
+            InlineKeyboardButton("ToonMixIndia", url=main),
+            InlineKeyboardButton("HentaiXplay", url=henati_domain)
+        ]
+    ]
+    
+    await client.send_message(
+        chat_id=message.chat.id,
+        text=txt.Start,
+        reply_markup=InlineKeyboardMarkup(buttons)
+    )
+
+@app.on_message(pyrogram.filters.command("help"))
+async def help_command(client, message):
+    await client.send_message(
+            chat_id=message.chat.id,
+            text=txt.Help
+        )
+    
+
+@app.on_message(pyrogram.filters.command("rules"))
+async def rules_command(client, message):
+    await client.send_message(
+            chat_id=message.chat.id,
+            text=txt.Rules
+        )
+    
 @app.on_message(pyrogram.filters.text)
-def handle_new_message(client , message):
-    search_query = message.text
-    if "/start" in search_query :
-        message.reply(rulesss)
-    if len(search_query) < 150 :
-        user = message.from_user.id
-        posts = fetch_wordpress_posts(search_query)
-        start = 0
-        end = 10
-        data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>”
-        \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
-        reply,m = show_results(posts, start, end ,data)
-        if reply == 0 :
-            pass
-        elif m == 0 :
-            pass
-        else :
-            m2 = get_keyboard(posts, start, end,user)
-            mak = InlineKeyboardMarkup(m+m2)
-            message.reply(reply, reply_markup=mak)
+async def handle_message(client, message):
+    # React to user's message
+    text = message.text
+    user = message.from_user.id
+    if check_hentai(text):
+        q = text.replace("hentai","")
+        search_results = requests.get("https://hai-back-5313083442a1.herokuapp.com/hanime/search?search="+q).json()
+        if search_results:
+            buttons = [[InlineKeyboardButton("How To Watch/Download❓",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
+            for result in search_results:
+                button = InlineKeyboardButton(result["title"], url=henati_domain+result["url"])
+                buttons.append([button])
+            buttons.append([InlineKeyboardButton(
+            " ❌ ", callback_data=f"del||{user}"
+        )])
+            await message.reply_text(
+                    text="Here are the search results ",
+                    reply_markup=InlineKeyboardMarkup(buttons)
+                )
+            await message.react(rand_emoji())
+    else:
+        search_results = requests.get("https://toonmixindia.in/apix5/findseries.php?api_key=HackerKi_Ma_ki_chut_bytmi&search="+text+"&per_page=100").json()
+        if search_results:
+            buttons =         buttons = [[InlineKeyboardButton("How To Watch/Download❓",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
+            for result in search_results:
+                button = InlineKeyboardButton(result["title"], url=result["url"])
+                buttons.append([button])
+            buttons.append([InlineKeyboardButton(
+            " ❌ ", callback_data=f"del||{user}"
+        )])
+            await message.reply_text(
+                    text="Here are the search results ",
+                    reply_markup=InlineKeyboardMarkup(buttons)
+                )
+            await message.react(rand_emoji())
+    
+
 @app.on_callback_query()
-def handle_callback_query(client ,callback_query):
+async def handle_callback_query(client ,callback_query):
     _ = callback_query.data.split("||")
     data = _[0]
     if _[1] != str(callback_query.from_user.id):
-        callback_query.answer(
+        await callback_query.answer(
             "😁 User Beta Masti Nahi... \nPlease Create Your Own Requests",
             show_alert=True
         )
         return
-    if data == "del" :
-        callback_query.message.delete()
-    else :
-        start, end = map(int, data.split(','))
-        xx = callback_query.message.reply_to_message.text
-        xx2 = callback_query.message.text
-        posts = fetch_wordpress_posts(xx)
-        reply,m = show_results(posts, start, end ,xx2)
-        m2 = get_keyboard(posts, start, end, _[1])
-        mak = InlineKeyboardMarkup(m+m2 )
-        callback_query.message.edit(reply, reply_markup=mak)
+    if data == "del":
+        await callback_query.message.delete()
 
 
-def show_results(posts, start, end , sss):
-    results = posts[start:end]
-    if results == []:
-        return 0 , 0
-    else :
-        reply = sss
-        buttons = [[InlineKeyboardButton("How To Watch/Download❓",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)]]
-        for result in results:
-            x = [InlineKeyboardButton(result['title'],url=result['url'])]
-            buttons.append(x)
-        return reply , buttons
-
-def get_keyboard(posts, start, end , user):
-    keyboard = []
-    keyboard.append([InlineKeyboardButton(
-            "⏮️ PREV.", callback_data=f"{start-10},{end-10}||{user}"),InlineKeyboardButton(
-            " ❌ ", callback_data=f"del||{user}"
-        ),InlineKeyboardButton(
-            "NEXT ⏭️", callback_data=f"{start+10},{end+10}||{user}"
-        )] )
-    return keyboard
-
-def fetch_wordpress_posts(search_query):
-    response = requests.get(f"{web_domain}/apix5/findseries.php?api_key=HackerKi_Ma_ki_chut_bytmi&search={search_query}&per_page=100")
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return []
-
-def delete_message_after_timeout(message, timeout):
-    time.sleep(timeout)
-    message.delete()
-
-app.run()
+if __name__ == "__main__":
+    app.run()
