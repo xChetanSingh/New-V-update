@@ -64,7 +64,7 @@ async def handle_message(client, message):
         q = text.replace("hentai","")
         search_results = requests.get("https://hai-back-5313083442a1.herokuapp.com/hanime/search?search="+q).json()
         if search_results:
-            buttons = [[InlineKeyboardButton("How To Watch/Download❓",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
+            buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
             for result in search_results:
                 button = InlineKeyboardButton(result["title"], url=henati_domain+result["url"])
                 buttons.append([button])
@@ -79,7 +79,7 @@ async def handle_message(client, message):
     else:
         search_results = requests.get("https://toonmixindia.in/apix5/findseries.php?api_key=HackerKi_Ma_ki_chut_bytmi&search="+text+"&per_page=100").json()
         if search_results:
-            buttons =         buttons = [[InlineKeyboardButton("How To Watch/Download❓",url=howtodownload)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
+            buttons =         buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
             for result in search_results:
                 button = InlineKeyboardButton(result["title"], url=result["url"])
                 buttons.append([button])
@@ -109,3 +109,4 @@ async def handle_callback_query(client ,callback_query):
 
 if __name__ == "__main__":
     app.run()
+
