@@ -2,96 +2,90 @@ import pyrogram
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import time
 import requests
-import random
-from fuzzywuzzy import fuzz
-from fuzzywuzzy import process
-from config import *
+import re
+
+#Configssss -- Edit Alll
+API_ID = 7999622
+API_HASH = '0c6b5e046ae4aff8987e95b93c9ce281'
+BOT_TOKEN = '6731569216:AAGP-JESgvMj82F7wanklsvjV-HA6LItM_U'
+TDMB_API = "b93049a713559ad90b95537da68308fe"
+web_domain = "https://www.toonmixindia.in/"
+hentai_domain = "https://hentaixplay.com/"
+howtodownload = "https://www.toonmixindia.in/how-to-use-me/"
+channelurl = "https://t.me/toonmix_india"
+botusername = "yukichanptbot"
+
+# Random Texts :
+
+rulesss = ''' ⁣<b>How To Use Me 📣</b> 
+
+Jab bhi aap bot se search 🔎 karwaaye toh first of all aapko yaad rakhna hai "Series name" + Season + (Number) agar koi movie hai toh movie name only 
+
+Example: Dr. stone Season 3
+
+Movie name example: Doraemon Stand By Me 2
+
+⁣<b>English</b>: Whenever U want to Search With Text Here. So You Need To Know First OF All "Series name" + Season + (Number) If U Want To Seach a Movie Then There Will be Need Just a Movie Name
+
+Example: Dr. stone Season 3
+
+Movie name example: Doraemon Stand By Me 2'''
+
+def has_emoji(text):
+    emoji_pattern = re.compile("["
+                               u"\U0001F600-\U0001F64F"  # emoticons
+                               u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+                               u"\U0001F680-\U0001F6FF"  # transport & map symbols
+                               u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                               u"\U00002500-\U00002BEF"  # chinese char
+                               u"\U00002702-\U000027B0"
+                               u"\U00002702-\U000027B0"
+                               u"\U000024C2-\U0001F251"
+                               u"\U0001f926-\U0001f937"
+                               u"\U00010000-\U0010ffff"
+                               u"\u2640-\u2642" 
+                               u"\u2600-\u2B55"
+                               u"\u200d"
+                               u"\u23cf"
+                               u"\u23e9"
+                               u"\u231a"
+                               u"\ufe0f"  # dingbats
+                               u"\u3030"
+                               "]+", flags=re.UNICODE)
+    return bool(emoji_pattern.search(text))
+
+def has_common_greeting(text):
+    greetings = ["hi","hlo" , "hello", "hey", "gm", "good morning", "good afternoon", "good evening", "ok", "okay", "hi there", "howdy", "greetings"]
+    normalized_text = text.lower()
+    for greeting in greetings:
+        if greeting in normalized_text:
+            return True
+    return False
+
 
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-
-
-def check_hentai(text,threshold=50):
-    matches = process.extract(text, trigger, scorer=fuzz.ratio)
-    filtered_matches = [match for match in matches if match[1] >= threshold]
-    if filtered_matches:
-        print(filtered_matches)
-        return True
-    else:
-        return False
-    
-def rand_emoji():
-    reactions = [ "👍", "👎", "😂", "😍", "😢", "😮", "😡", "😆", "🎉", "❤️", "😜", "🤔", "👏", "💯", "🔥", "🙌", "😎", "🥳", "🤯", "🙈", "💔", "🤗", "🤩", "😷", "😴", "😋", "😒", "😏", "🙄", "😓", "😱", "😰", "😳", "😵", "🤤", "😈", "👻", "🤪", "🤨", "🤮", "😇", "🤬", "🥺", "🥵", "🥶", "😠", "💩", "👀", "🙏", "💪", "✨", "🎶", "🌟", "👋", "😝", "🤝", "✌️", "🤞", "👌" ]
-    reaction = random.choice(reactions)
-    return reaction
-
-@app.on_message(pyrogram.filters.command("start"))
-async def start_command(client, message):
-    buttons = [
-        [
-            InlineKeyboardButton("ToonMixIndia", url=main),
-            InlineKeyboardButton("HentaiXplay", url=henati_domain)
-        ]
-    ]
-    
-    await client.send_message(
-        chat_id=message.chat.id,
-        text=txt.Start,
-        reply_markup=InlineKeyboardMarkup(buttons)
-    )
-
-@app.on_message(pyrogram.filters.command("help"))
-async def help_command(client, message):
-    await client.send_message(
-            chat_id=message.chat.id,
-            text=txt.Help
-        )
-    
-
-@app.on_message(pyrogram.filters.command("rules"))
-async def rules_command(client, message):
-    await client.send_message(
-            chat_id=message.chat.id,
-            text=txt.Rules
-        )
-    
 @app.on_message(pyrogram.filters.text)
-async def handle_message(client, message):
-    # React to user's message
-    text = message.text
-    user = message.from_user.id
-    if check_hentai(text):
-        q = text.replace("hentai","")
-        search_results = requests.get("https://hai-back-5313083442a1.herokuapp.com/hanime/search?search="+q).json()
-        if search_results:
-            buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
-            for result in search_results:
-                button = InlineKeyboardButton(result["title"], url=henati_domain+result["url"])
-                buttons.append([button])
-            buttons.append([InlineKeyboardButton(
-            " ❌ ", callback_data=f"del||{user}"
-        )])
-            await message.reply_text(
-                    text="Here are the search results ",
-                    reply_markup=InlineKeyboardMarkup(buttons)
-                )
-            await message.react(rand_emoji())
+async def handle_new_message(client , message):
+    search_query = message.text
+    if has_emoji(search_query) :
+        pass
+    elif has_common_greeting(search_query):
+        pass
     else:
-        search_results = requests.get("https://toonmixindia.in/apix5/findseries.php?api_key=HackerKi_Ma_ki_chut_bytmi&search="+text+"&per_page=100").json()
-        if search_results:
-            buttons =         buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=main)]]
-            for result in search_results:
-                button = InlineKeyboardButton(result["title"], url=result["url"])
-                buttons.append([button])
+        if "/start" in search_query :
+            await message.reply(rulesss)
+        if len(search_query) < 150 :
+            user = message.from_user.id
+            data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>” \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
+            buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai_domain)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)]]
             buttons.append([InlineKeyboardButton(
-            " ❌ ", callback_data=f"del||{user}"
-        )])
-            await message.reply_text(
-                    text="Here are the search results ",
-                    reply_markup=InlineKeyboardMarkup(buttons)
-                )
-            await message.react(rand_emoji())
-    
+                " ❌ ", callback_data=f"del||{user}"
+            )])
+            await message.reply(
+                        text=data,
+                        reply_markup=InlineKeyboardMarkup(buttons)
+                    )
 
 @app.on_callback_query()
 async def handle_callback_query(client ,callback_query):
@@ -107,6 +101,8 @@ async def handle_callback_query(client ,callback_query):
         await callback_query.message.delete()
 
 
-if __name__ == "__main__":
-    app.run()
+def delete_message_after_timeout(message, timeout):
+    time.sleep(timeout)
+    message.delete()
 
+app.run()
