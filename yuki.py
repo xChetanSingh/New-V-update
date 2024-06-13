@@ -55,7 +55,7 @@ def has_emoji(text):
     return bool(emoji_pattern.search(text))
 
 def has_common_greeting(text):
-    greetings = ["hi","hlo" , "hello", "hey", "gm", "good morning", "good afternoon", "good evening", "ok", "okay", "hi there", "howdy", "greetings","/purge","/start","/settings"]
+    greetings = ["hi","hlo" , "hello", "hey", "gm", "good morning", "good afternoon", "good evening", "ok", "okay", "hi there", "howdy", "greetings","/purge","/start","/settings","/","acha","accha","ok","okay","ji","bikul"]
     normalized_text = text.lower()
     for greeting in greetings:
         if greeting in normalized_text:
