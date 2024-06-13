@@ -76,16 +76,28 @@ async def handle_new_message(client , message):
         if "/start" in search_query :
             await message.reply(rulesss)
         if len(search_query) < 150 :
-            user = message.from_user.id
-            data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>” \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
-            buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai_domain)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)]]
-            buttons.append([InlineKeyboardButton(
-                " ❌ ", callback_data=f"del||{user}"
-            )])
-            await message.reply(
-                        text=data,
-                        reply_markup=InlineKeyboardMarkup(buttons)
-                    )
+            try:
+                response = requests.get(f"https://stream.toonmix.site/checkfile.php?search={search_query}")
+                response.raise_for_status()  # Raise an exception for HTTP errors
+                data = response.json()
+                is_success = data.get("success", False)
+                if is_success:
+                    user = message.from_user.id
+                    data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>” \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
+                    buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai_domain)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)]]
+                    buttons.append([InlineKeyboardButton(
+                        " ❌ ", callback_data=f"del||{user}"
+                    )])
+                    await message.reply(
+                                text=data,
+                                reply_markup=InlineKeyboardMarkup(buttons)
+                            )
+            except requests.RequestException as e:
+                print(f"Request failed: {e}")
+                is_success = False
+            except ValueError as e:
+                print(f"Invalid JSON response: {e}")
+                is_success = False
 
 @app.on_callback_query()
 async def handle_callback_query(client ,callback_query):
