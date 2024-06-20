@@ -7,7 +7,7 @@ import re
 #Configssss -- Edit Alll
 API_ID = 7999622
 API_HASH = '0c6b5e046ae4aff8987e95b93c9ce281'
-BOT_TOKEN = '6731569216:AAGP-JESgvMj82F7wanklsvjV-HA6LItM_U'
+BOT_TOKEN = '6731569216:AAEIctl1U-Xfn4rEeAPizyb255MEkEbAtGg'
 TDMB_API = "b93049a713559ad90b95537da68308fe"
 web_domain = "https://www.toonmixindia.in/"
 hentai_domain = "https://hentaixplay.com/"
