@@ -7,7 +7,7 @@ import re
 # Configs -- Edit All
 API_ID = 7999622
 API_HASH = '0c6b5e046ae4aff8987e95b93c9ce281'
-BOT_TOKEN = '5618692983:AAGIrZsVV2fTTbFZWgui_7QujZf18UKkg8E'
+BOT_TOKEN = '5618692983:AAHUjV3zyC6ZeYkeqtkp0MPwdUKzLIiROvg'
 web_domain = "https://www.toonmixindia.in/"
 hentai_domain = "https://hentaixplay.com/home"
 channelurl = "https://t.me/toonmix_india"
@@ -52,7 +52,7 @@ async def handle_start_command(client, message):
 
 @app.on_message(pyrogram.filters.text)
 async def handle_new_message(client, message):
-    search_query = message.text.replace(" ", "_")
+    search_query = message.text.replace(" ", "+")
     if has_emoji(search_query):
         pass
     elif has_common_greeting(search_query):
@@ -66,11 +66,9 @@ async def handle_new_message(client, message):
                 is_success = data.get("success", False)
                 if is_success:
                     user = message.from_user.id
+                    search_link = f"https://t.me/{botusername}?start={search_query.replace(' ', '_')}"
                     data = f'''<b>Results for : {message.text} </b> \nRequested By : “<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>” \nUse 𝘽𝙍𝘼𝙑𝙀 𝘽𝙍𝙊𝙒𝙎𝙀𝙍 🌐 App for Blocking Annoyings Ads!'''
-                    buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai_domain)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)],[InlineKeyboardButton("🔍 View Search Results 👀", url="https://t.me/"+botusername+"/app?startapp="+search_query)]]
-                    buttons.append([InlineKeyboardButton(
-                        " ❌ ", callback_data=f"del||{user}"
-                    )])
+                    buttons = [[InlineKeyboardButton("Watch Hentai✨",url=hentai_domain)],[InlineKeyboardButton("📲 Join Channel",url=channelurl),InlineKeyboardButton("🌐 Visit Web",url=web_domain)],[InlineKeyboardButton("🔍 View Search Results 👀", url=search_link)],[InlineKeyboardButton(" ❌ ", callback_data=f"del||{user}")]]
                     await message.reply(
                                 text=data,
                                 reply_markup=InlineKeyboardMarkup(buttons)
