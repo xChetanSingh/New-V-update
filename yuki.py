@@ -7,29 +7,11 @@ import re
 #Configssss -- Edit Alll
 API_ID = 7999622
 API_HASH = '0c6b5e046ae4aff8987e95b93c9ce281'
-BOT_TOKEN = '6731569216:AAEIctl1U-Xfn4rEeAPizyb255MEkEbAtGg'
-TDMB_API = "b93049a713559ad90b95537da68308fe"
+BOT_TOKEN = '5618692983:AAGIrZsVV2fTTbFZWgui_7QujZf18UKkg8E'
 web_domain = "https://www.toonmixindia.in/"
-hentai_domain = "https://hentaixplay.com/"
-howtodownload = "https://www.toonmixindia.in/how-to-use-me/"
+hentai_domain = "https://hentaixplay.com/home"
 channelurl = "https://t.me/toonmix_india"
-botusername = "yukichanptbot"
-
-# Random Texts :
-
-rulesss = ''' ⁣<b>How To Use Me 📣</b> 
-
-Jab bhi aap bot se search 🔎 karwaaye toh first of all aapko yaad rakhna hai "Series name" + Season + (Number) agar koi movie hai toh movie name only 
-
-Example: Dr. stone Season 3
-
-Movie name example: Doraemon Stand By Me 2
-
-⁣<b>English</b>: Whenever U want to Search With Text Here. So You Need To Know First OF All "Series name" + Season + (Number) If U Want To Seach a Movie Then There Will be Need Just a Movie Name
-
-Example: Dr. stone Season 3
-
-Movie name example: Doraemon Stand By Me 2'''
+botusername = "Himejima_Akeno_Bot"
 
 def has_emoji(text):
     emoji_pattern = re.compile("["
