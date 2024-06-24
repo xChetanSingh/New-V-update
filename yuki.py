@@ -49,7 +49,7 @@ app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT
 
 @app.on_message(pyrogram.filters.text)
 async def handle_new_message(client , message):
-    search_query = message.text
+    search_query = message.text.replace(" ","_")
     if has_emoji(search_query) :
         pass
     elif has_common_greeting(search_query):
