@@ -4,7 +4,7 @@ import time
 import requests
 import re
 
-#Configssss -- Edit Alll
+# Configs -- Edit All
 API_ID = 7999622
 API_HASH = '0c6b5e046ae4aff8987e95b93c9ce281'
 BOT_TOKEN = '5618692983:AAGIrZsVV2fTTbFZWgui_7QujZf18UKkg8E'
@@ -37,27 +37,28 @@ def has_emoji(text):
     return bool(emoji_pattern.search(text))
 
 def has_common_greeting(text):
-    greetings = ["hi","hlo" , "hello", "hey", "gm", "good morning", "good afternoon", "good evening", "ok", "okay", "hi there", "howdy", "greetings","/purge","/start","/settings","/","acha","accha","ok","okay","ji","bikul"]
+    greetings = ["hi","hlo", "hello", "hey", "gm", "good morning", "good afternoon", "good evening", "ok", "okay", "hi there", "howdy", "greetings","/purge","/settings","/","acha","accha","ok","okay","ji","bikul"]
     normalized_text = text.lower()
     for greeting in greetings:
         if greeting in normalized_text:
             return True
     return False
 
-
 app = pyrogram.Client("myboost", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
+@app.on_message(pyrogram.filters.command("start"))
+async def handle_start_command(client, message):
+    await message.reply("Welcome to ToonMix India Bot! 🎉\nUse this bot to search for your favorite anime shows.")
+
 @app.on_message(pyrogram.filters.text)
-async def handle_new_message(client , message):
-    search_query = message.text.replace(" ","_")
-    if has_emoji(search_query) :
+async def handle_new_message(client, message):
+    search_query = message.text.replace(" ", "_")
+    if has_emoji(search_query):
         pass
     elif has_common_greeting(search_query):
         pass
     else:
-        if "/start" in search_query :
-            await message.reply(rulesss)
-        if len(search_query) < 150 :
+        if len(search_query) < 150:
             try:
                 response = requests.get(f"https://stream.toonmix.site/checkfile.php?search={search_query}")
                 response.raise_for_status()  # Raise an exception for HTTP errors
@@ -93,7 +94,6 @@ async def handle_callback_query(client ,callback_query):
         return
     if data == "del":
         await callback_query.message.delete()
-
 
 def delete_message_after_timeout(message, timeout):
     time.sleep(timeout)
